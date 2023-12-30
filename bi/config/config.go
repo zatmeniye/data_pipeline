@@ -15,13 +15,8 @@ type Http struct {
 }
 
 type Database struct {
-	Host     string `env:"DATABASE_HOST"`
-	Port     string `env:"DATABASE_PORT"`
-	Database string `env:"DATABASE_DATABASE"`
-	User     string `env:"DATABASE_USER"`
-	Password string `env:"DATABASE_PASSWORD"`
-	Schema   string `env:"DATABASE_SCHEMA"`
-	Type     string `env:"DATABASE_TYPE"`
+	Type string `env:"DB_TYPE"`
+	Dsn  string `env:"DSN"`
 }
 
 func New() (*Config, error) {
@@ -36,13 +31,8 @@ func New() (*Config, error) {
 		return nil, err
 	}
 
-	cfg.Database.User = os.Getenv("DATABASE_USER")
-	cfg.Database.Password = os.Getenv("DATABASE_PASSWORD")
-	cfg.Database.Host = os.Getenv("DATABASE_HOST")
-	cfg.Database.Port = os.Getenv("DATABASE_PORT")
-	cfg.Database.Database = os.Getenv("DATABASE_DATABASE")
-	cfg.Database.Schema = os.Getenv("DATABASE_SCHEMA")
-	cfg.Database.Type = os.Getenv("DATABASE_TYPE")
+	cfg.Database.Dsn = os.Getenv("DSN")
+	cfg.Database.Type = os.Getenv("DB_TYPE")
 
 	return &cfg, nil
 }

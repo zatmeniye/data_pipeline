@@ -3,21 +3,19 @@ services:
     build: .
     ports:
       - 80:80
+    depends_on:
+      - postgres
     volumes:
       - ./logs/.log:/app/logs/.log
     environment:
-      DATABASE_USER: example
-      DATABASE_PASSWORD: example
-      DATABASE_HOST: postgres
-      DATABASE_PORT: 5432
-      DATABASE_DATABASE: example
+      DSN: postgres://example:example@postgres:5432/embedded?sslmode=disable
+      DB_TYPE: postgres
 
   postgres:
     image: postgres
     environment:
       POSTGRES_USER: example
       POSTGRES_PASSWORD: example
-      POSTGRES_DB: example
     volumes:
       - ./migration:/docker-entrypoint-initdb.d
 

@@ -16,7 +16,7 @@ type Database struct {
 	placeholderFormat sq.PlaceholderFormat
 }
 
-func New(cfg *config.Database) (*Database, error) {
+func New(cfg config.Database) (*Database, error) {
 	if !isValidType(cfg.Type) {
 		return nil, errors.New(fmt.Sprintf(
 			`неизвестный тип базы данных: "%s"`,
@@ -24,18 +24,7 @@ func New(cfg *config.Database) (*Database, error) {
 		))
 	}
 
-	conn, err := sql.Open(
-		cfg.Type,
-		fmt.Sprintf(
-			"%s://%s:%s@%s:%s/%s",
-			cfg.Schema,
-			cfg.User,
-			cfg.Password,
-			cfg.Host,
-			cfg.Port,
-			cfg.Database,
-		),
-	)
+	conn, err := sql.Open(cfg.Type, cfg.Dsn)
 	if err != nil {
 		return nil, err
 	}

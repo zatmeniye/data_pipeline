@@ -1,0 +1,65 @@
+2023-12-30T17:49:37.810Z	FATAL	cmd/main.go:17	pq: SSL is not enabled on the server
+main.main
+	/app/cmd/main.go:17
+runtime.main
+	/usr/local/go/src/runtime/proc.go:267
+2023-12-30T17:51:15.315Z	ERROR	service/source_typ.go:26	pq: relation "source_typ" does not exist
+bi/internal/service.(*SourceTypService).GetAll
+	/app/internal/service/source_typ.go:26
+bi/internal/controller/http.sourceTypRouter.getAll
+	/app/internal/controller/http/source_typ.go:22
+github.com/gofiber/fiber/v2.(*App).next
+	/go/pkg/mod/github.com/gofiber/fiber/v2@v2.51.0/router.go:145
+github.com/gofiber/fiber/v2.(*App).handler
+	/go/pkg/mod/github.com/gofiber/fiber/v2@v2.51.0/router.go:172
+github.com/valyala/fasthttp.(*Server).serveConn
+	/go/pkg/mod/github.com/valyala/fasthttp@v1.50.0/server.go:2359
+github.com/valyala/fasthttp.(*workerPool).workerFunc
+	/go/pkg/mod/github.com/valyala/fasthttp@v1.50.0/workerpool.go:224
+github.com/valyala/fasthttp.(*workerPool).getCh.func1
+	/go/pkg/mod/github.com/valyala/fasthttp@v1.50.0/workerpool.go:196
+2023-12-30T17:52:57.593Z	ERROR	service/source_typ.go:26	pq: relation "source_typ" does not exist
+bi/internal/service.(*SourceTypService).GetAll
+	/app/internal/service/source_typ.go:26
+bi/internal/controller/http.sourceTypRouter.getAll
+	/app/internal/controller/http/source_typ.go:22
+github.com/gofiber/fiber/v2.(*App).next
+	/go/pkg/mod/github.com/gofiber/fiber/v2@v2.51.0/router.go:145
+github.com/gofiber/fiber/v2.(*App).handler
+	/go/pkg/mod/github.com/gofiber/fiber/v2@v2.51.0/router.go:172
+github.com/valyala/fasthttp.(*Server).serveConn
+	/go/pkg/mod/github.com/valyala/fasthttp@v1.50.0/server.go:2359
+github.com/valyala/fasthttp.(*workerPool).workerFunc
+	/go/pkg/mod/github.com/valyala/fasthttp@v1.50.0/workerpool.go:224
+github.com/valyala/fasthttp.(*workerPool).getCh.func1
+	/go/pkg/mod/github.com/valyala/fasthttp@v1.50.0/workerpool.go:196
+2023-12-30T17:52:58.735Z	ERROR	service/source_typ.go:26	pq: relation "source_typ" does not exist
+bi/internal/service.(*SourceTypService).GetAll
+	/app/internal/service/source_typ.go:26
+bi/internal/controller/http.sourceTypRouter.getAll
+	/app/internal/controller/http/source_typ.go:22
+github.com/gofiber/fiber/v2.(*App).next
+	/go/pkg/mod/github.com/gofiber/fiber/v2@v2.51.0/router.go:145
+github.com/gofiber/fiber/v2.(*App).handler
+	/go/pkg/mod/github.com/gofiber/fiber/v2@v2.51.0/router.go:172
+github.com/valyala/fasthttp.(*Server).serveConn
+	/go/pkg/mod/github.com/valyala/fasthttp@v1.50.0/server.go:2359
+github.com/valyala/fasthttp.(*workerPool).workerFunc
+	/go/pkg/mod/github.com/valyala/fasthttp@v1.50.0/workerpool.go:224
+github.com/valyala/fasthttp.(*workerPool).getCh.func1
+	/go/pkg/mod/github.com/valyala/fasthttp@v1.50.0/workerpool.go:196
+2023-12-30T17:57:24.967Z	ERROR	service/source_typ.go:26	pq: relation "source_typ" does not exist
+bi/internal/service.(*SourceTypService).GetAll
+	/app/internal/service/source_typ.go:26
+bi/internal/controller/http.sourceTypRouter.getAll
+	/app/internal/controller/http/source_typ.go:22
+github.com/gofiber/fiber/v2.(*App).next
+	/go/pkg/mod/github.com/gofiber/fiber/v2@v2.51.0/router.go:145
+github.com/gofiber/fiber/v2.(*App).handler
+	/go/pkg/mod/github.com/gofiber/fiber/v2@v2.51.0/router.go:172
+github.com/valyala/fasthttp.(*Server).serveConn
+	/go/pkg/mod/github.com/valyala/fasthttp@v1.50.0/server.go:2359
+github.com/valyala/fasthttp.(*workerPool).workerFunc
+	/go/pkg/mod/github.com/valyala/fasthttp@v1.50.0/workerpool.go:224
+github.com/valyala/fasthttp.(*workerPool).getCh.func1
+	/go/pkg/mod/github.com/valyala/fasthttp@v1.50.0/workerpool.go:196

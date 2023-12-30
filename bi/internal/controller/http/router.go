@@ -1,12 +1,13 @@
 package http
 
 import (
+	"bi/internal/service"
 	"github.com/gofiber/fiber/v2"
-	"go.uber.org/zap"
 )
 
 func WithRouter(
-	l *zap.SugaredLogger,
 	app *fiber.App,
+	sourceTypService *service.SourceTypService,
 ) {
+	withSourceTypRouter(app, sourceTypService)
 }

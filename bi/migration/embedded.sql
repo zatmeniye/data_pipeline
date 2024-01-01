@@ -12,7 +12,7 @@ CREATE TABLE source_typ(
 CREATE TABLE source(
                        source_id SERIAL PRIMARY KEY,
                        dsn TEXT NOT NULL,
-                       typ INTEGER NOT NULL
+                       source_typ_id INTEGER NOT NULL
                            REFERENCES source_typ (source_typ_id)
                                ON DELETE CASCADE
 );

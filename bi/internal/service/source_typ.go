@@ -1,7 +1,8 @@
 package service
 
 import (
-	"bi/internal/entity"
+	"bi/internal/dto"
+	"bi/internal/interfaces"
 	"context"
 	"github.com/gofiber/fiber/v2"
 	"go.uber.org/zap"
@@ -10,17 +11,23 @@ import (
 
 type SourceTypService struct {
 	l                   *zap.SugaredLogger
-	sourceTypRepository SourceTypRepository
+	sourceTypRepository interfaces.SourceTypRepository
+	sourceTypMapper     interfaces.SourceTypMapper
 }
 
 func NewSourceTypService(
 	l *zap.SugaredLogger,
-	sourceTypRepository SourceTypRepository,
+	sourceTypRepository interfaces.SourceTypRepository,
+	sourceTypMapper interfaces.SourceTypMapper,
 ) *SourceTypService {
-	return &SourceTypService{sourceTypRepository: sourceTypRepository, l: l}
+	return &SourceTypService{
+		l:                   l,
+		sourceTypRepository: sourceTypRepository,
+		sourceTypMapper:     sourceTypMapper,
+	}
 }
 
-func (s *SourceTypService) GetAll(ctx context.Context) ([]entity.SourceTyp, error) {
+func (s *SourceTypService) GetAll(ctx context.Context) ([]dto.SourceTypDto, error) {
 	sourceTypes, err := s.sourceTypRepository.GetAll(ctx)
 	if err != nil {
 		s.l.Error(err)
@@ -29,5 +36,17 @@ func (s *SourceTypService) GetAll(ctx context.Context) ([]entity.SourceTyp, erro
 			"произошла ошибка при получении типов источников",
 		)
 	}
-	return sourceTypes, nil
+	dtos := make([]dto.SourceTypDto, 0, len(sourceTypes))
+	for _, sourceType := range sourceTypes {
+		sourceTypeDto, err := s.sourceTypMapper.EntityToDto(ctx, sourceType)
+		if err != nil {
+			s.l.Error(err)
+			return nil, fiber.NewError(
+				http.StatusInternalServerError,
+				"произошла ошибка при получении типов источников",
+			)
+		}
+		dtos = append(dtos, sourceTypeDto)
+	}
+	return dtos, nil
 }

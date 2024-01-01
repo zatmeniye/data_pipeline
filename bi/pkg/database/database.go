@@ -41,6 +41,10 @@ func New(cfg config.Database) (*Database, error) {
 	}, nil
 }
 
+func (db *Database) Close() {
+	_ = db.conn.Close()
+}
+
 const (
 	Postgres = "postgres"
 )

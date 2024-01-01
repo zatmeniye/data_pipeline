@@ -1,0 +1,61 @@
+definitions:
+  dto.QueryDto:
+    properties:
+      query:
+        type: string
+      sourceId:
+        type: integer
+    type: object
+  dto.SourceAddDto:
+    properties:
+      dsn:
+        type: string
+      typId:
+        type: integer
+    type: object
+  dto.SourceTypDto:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /source/:
+    post:
+      parameters:
+      - description: source
+        in: body
+        name: source
+        required: true
+        schema:
+          $ref: '#/definitions/dto.SourceAddDto'
+      responses: {}
+      tags:
+      - источник
+  /source/exec/:
+    post:
+      parameters:
+      - description: query
+        in: body
+        name: query
+        required: true
+        schema:
+          $ref: '#/definitions/dto.QueryDto'
+      responses: {}
+      tags:
+      - источник
+  /source_typ/:
+    get:
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/dto.SourceTypDto'
+            type: array
+      tags:
+      - тип источника
+swagger: "2.0"

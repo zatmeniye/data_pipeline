@@ -3,6 +3,7 @@ package app
 import (
 	"bi/config"
 	"bi/internal/controller/http"
+	"bi/internal/mapper"
 	"bi/internal/repository"
 	"bi/internal/service"
 	"bi/pkg/database"
@@ -20,15 +21,23 @@ func Run(l *zap.SugaredLogger, cfg *config.Config) error {
 
 	var (
 		sourceTypRepository = repository.NewSourceTypRepository(embeddedDb)
+		sourceRepository    = repository.NewSourceRepository(embeddedDb)
 	)
 
 	var (
-		sourceTypService = service.NewSourceTypService(l, sourceTypRepository)
+		sourceTypMapper = mapper.NewSourceTypMapper()
+		sourceMapper    = mapper.NewSourceMapper(sourceTypMapper, sourceTypRepository)
+	)
+
+	var (
+		sourceTypService = service.NewSourceTypService(l, sourceTypRepository, sourceTypMapper)
+		sourceService    = service.NewSourceService(l, sourceRepository, sourceMapper)
 	)
 
 	http.WithRouter(
 		app,
 		sourceTypService,
+		sourceService,
 	)
 
 	return app.Listen(cfg.Http.Address)

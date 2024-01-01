@@ -1,0 +1,99 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/source/": {
+            "post": {
+                "tags": [
+                    "источник"
+                ],
+                "parameters": [
+                    {
+                        "description": "source",
+                        "name": "source",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.SourceAddDto"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/source/exec/": {
+            "post": {
+                "tags": [
+                    "источник"
+                ],
+                "parameters": [
+                    {
+                        "description": "query",
+                        "name": "query",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.QueryDto"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/source_typ/": {
+            "get": {
+                "tags": [
+                    "тип источника"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/dto.SourceTypDto"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "dto.QueryDto": {
+            "type": "object",
+            "properties": {
+                "query": {
+                    "type": "string"
+                },
+                "sourceId": {
+                    "type": "integer"
+                }
+            }
+        },
+        "dto.SourceAddDto": {
+            "type": "object",
+            "properties": {
+                "dsn": {
+                    "type": "string"
+                },
+                "typId": {
+                    "type": "integer"
+                }
+            }
+        },
+        "dto.SourceTypDto": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

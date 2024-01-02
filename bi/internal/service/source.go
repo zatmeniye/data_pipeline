@@ -26,12 +26,49 @@ func NewSourceService(
 	sourceRepository interfaces.SourceRepository,
 	sourceMapper interfaces.SourceMapper,
 ) *SourceService {
-	return &SourceService{
+
+	//TODO: ПРИДУМАТЬ ОБРАБОТКУ ОШИБОК ПРИ ДОБАВЛЕНИИ ИСТОЧНИКА.
+
+	sources, _ := sourceRepository.GetAll(context.Background())
+
+	sourceService := &SourceService{
 		l:                l,
 		sourceRepository: sourceRepository,
 		sourceMapper:     sourceMapper,
 		keepers:          make(map[uint32]*keeper.Keeper),
 	}
+
+	for _, source := range sources {
+		_ = sourceService.addKeeper(source)
+	}
+
+	return sourceService
+}
+
+func (s *SourceService) GetAll(ctx context.Context) ([]dto.SourceDto, error) {
+	sources, err := s.sourceRepository.GetAll(ctx)
+	if err != nil {
+		s.l.Error(err)
+		return make([]dto.SourceDto, 0, 0), fiber.NewError(
+			http.StatusInternalServerError,
+			"произошла ошибка при получении источников",
+		)
+	}
+
+	dtos := make([]dto.SourceDto, 0, len(sources))
+	for _, source := range sources {
+		sourceDto, err := s.sourceMapper.EntityToDto(ctx, source)
+		if err != nil {
+			s.l.Error(err)
+			return make([]dto.SourceDto, 0, 0), fiber.NewError(
+				http.StatusInternalServerError,
+				"произошла ошибка при получении источников",
+			)
+		}
+		dtos = append(dtos, sourceDto)
+	}
+
+	return dtos, nil
 }
 
 func (s *SourceService) Add(ctx context.Context, addDto dto.SourceAddDto) (uint32, error) {

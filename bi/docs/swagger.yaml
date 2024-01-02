@@ -13,6 +13,15 @@ definitions:
       typId:
         type: integer
     type: object
+  dto.SourceDto:
+    properties:
+      dsn:
+        type: string
+      id:
+        type: integer
+      typ:
+        $ref: '#/definitions/dto.SourceTypDto'
+    type: object
   dto.SourceTypDto:
     properties:
       id:
@@ -24,6 +33,16 @@ info:
   contact: {}
 paths:
   /source/:
+    get:
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/dto.SourceDto'
+            type: array
+      tags:
+      - источник
     post:
       parameters:
       - description: source

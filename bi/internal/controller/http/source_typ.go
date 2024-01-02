@@ -18,9 +18,9 @@ func withSourceTypRouter(
 	sourceTyp.Get("/", r.getAll)
 }
 
-// @tags тип источника
-// @success 200 {array} dto.SourceTypDto
-// @router /source_typ/ [get]
+//	@tags		тип источника
+//	@success	200	{array}	dto.SourceTypDto
+//	@router		/source_typ/ [get]
 func (r sourceTypRouter) getAll(ctx *fiber.Ctx) error {
 	sourceTypes, err := r.sourceTypService.GetAll(ctx.Context())
 	if err != nil {

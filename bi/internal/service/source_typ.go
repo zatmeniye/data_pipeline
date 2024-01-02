@@ -31,7 +31,7 @@ func (s *SourceTypService) GetAll(ctx context.Context) ([]dto.SourceTypDto, erro
 	sourceTypes, err := s.sourceTypRepository.GetAll(ctx)
 	if err != nil {
 		s.l.Error(err)
-		return nil, fiber.NewError(
+		return make([]dto.SourceTypDto, 0, 0), fiber.NewError(
 			http.StatusInternalServerError,
 			"произошла ошибка при получении типов источников",
 		)
@@ -41,7 +41,7 @@ func (s *SourceTypService) GetAll(ctx context.Context) ([]dto.SourceTypDto, erro
 		sourceTypeDto, err := s.sourceTypMapper.EntityToDto(ctx, sourceType)
 		if err != nil {
 			s.l.Error(err)
-			return nil, fiber.NewError(
+			return make([]dto.SourceTypDto, 0, 0), fiber.NewError(
 				http.StatusInternalServerError,
 				"произошла ошибка при получении типов источников",
 			)

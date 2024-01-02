@@ -16,6 +16,22 @@ const docTemplate = `{
     "basePath": "{{.BasePath}}",
     "paths": {
         "/source/": {
+            "get": {
+                "tags": [
+                    "источник"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/dto.SourceDto"
+                            }
+                        }
+                    }
+                }
+            },
             "post": {
                 "tags": [
                     "источник"
@@ -92,6 +108,20 @@ const docTemplate = `{
                 },
                 "typId": {
                     "type": "integer"
+                }
+            }
+        },
+        "dto.SourceDto": {
+            "type": "object",
+            "properties": {
+                "dsn": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "typ": {
+                    "$ref": "#/definitions/dto.SourceTypDto"
                 }
             }
         },
